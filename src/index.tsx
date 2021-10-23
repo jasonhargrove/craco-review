@@ -1,12 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import './styles/globals.scss';
+import styles from './styles/app.module.scss';
+
+import Home from './pages/Home';
+const ConnectWallet = () => (<>Connect Wallet</>);
+const DisconnectWallet = () => (<>Disconnect Wallet</>);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className={styles.app}>
+      <header>
+        Header
+      </header>
+      <Router>
+        <main>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path={["/connect","/login","/signin"]} component={ConnectWallet} />
+            <Route exact path={["/disconnect","/logout","/signout"]} component={DisconnectWallet} />
+          </Switch>
+        </main>
+      </Router>
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
